@@ -1,5 +1,5 @@
 // YouTube API Configuration - Fixed with proper API integration
-const YOUTUBE_API_KEY = 'AIzaSyAXSe0Pb45EUBC5yWT3sMTJWetV1oLbVM8'; // Replace with your actual API key
+const YOUTUBE_API_KEY = ''; // Replace with your actual API key
 const YOUTUBE_API_BASE = 'https://www.googleapis.com/youtube/v3';
 
 // Global variables
@@ -1864,3 +1864,4 @@ if ('serviceWorker' in navigator) {
 }
 
 console.log('🎵 Pattupetti Music Streaming v2.0.1 - Loaded successfully!');
+
