@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Pattupetti Music Streaming</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #020024, #090979, #00D4FF);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(50px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-family: "Brush Script MT", cursive;
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffffff, #89E7FA);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(137, 231, 250, 0.2);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: rgba(137, 231, 250, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #89E7FA;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-content {
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .section-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Creator Info */
+        .creator-info {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .creator-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #635CF7, #89E7FA);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            flex-shrink: 0;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .creator-details h3 {
+            color: #89E7FA;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .creator-details p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* Features List */
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #635CF7, #89E7FA);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-item-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tech-item-name {
+            font-size: 0.9rem;
+            color: #89E7FA;
+            font-weight: bold;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .social-link.youtube:hover {
+            border-color: #FF0000;
+            box-shadow: 0 10px 25px rgba(255, 0, 0, 0.2);
+        }
+
+        .social-link.instagram:hover {
+            border-color: #E4405F;
+            box-shadow: 0 10px 25px rgba(228, 64, 95, 0.2);
+        }
+
+        .social-link.twitter:hover {
+            border-color: #1DA1F2;
+            box-shadow: 0 10px 25px rgba(29, 161, 242, 0.2);
+        }
+
+        .social-link.github:hover {
+            border-color: #666;
+            box-shadow: 0 10px 25px rgba(102, 102, 102, 0.2);
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #635CF7, #89E7FA);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .social-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: #89E7FA;
+        }
+
+        .social-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Support Actions */
+        .support-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .support-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .support-btn.primary {
+            background: #89E7FA;
+            color: black;
+        }
+
+        .support-btn.primary:hover {
+            background: #5bc0de;
+            transform: translateY(-2px);
+        }
+
+        .support-btn.secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .support-btn.secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .support-btn.tertiary {
+            background: linear-gradient(45deg, #FF6B6B, #FFD93D);
+            color: black;
+        }
+
+        .support-btn.tertiary:hover {
+            background: linear-gradient(45deg, #FF5252, #FFCC02);
+            transform: translateY(-2px);
+        }
+
+        /* Version Info */
+        .version-info {
+            background: rgba(137, 231, 250, 0.1);
+            border: 1px solid rgba(137, 231, 250, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .version-info h4 {
+            color: #89E7FA;
+            margin-bottom: 0.5rem;
+        }
+
+        .version-info p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .container {
+                padding: 2rem;
+            }
+
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .back-btn {
+                position: static;
+                margin-bottom: 2rem;
+                align-self: flex-start;
+            }
+
+            .creator-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+
+            .creator-avatar {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+                align-self: center;
+            }
+
+            .social-links {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .social-link {
+                padding: 0.75rem;
+            }
+
+            .support-actions {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .support-btn {
+                padding: 0.75rem 1rem;
+                justify-content: center;
+            }
+
+            .tech-stack {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.75rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .creator-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+
+            .tech-stack {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Changelog Styles */
+        .changelog-item {
+            border-left: 3px solid #89E7FA;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .changelog-version {
+            color: #89E7FA;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .changelog-date {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .changelog-changes {
+            list-style: none;
+            padding: 0;
+        }
+
+        .changelog-changes li {
+            padding: 0.25rem 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .changelog-changes li::before {
+            content: "• ";
+            color: #89E7FA;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-btn">
+        ← Back to App
+    </a>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="logo">Pattupetti</h1>
+            <p class="subtitle">Your Ultimate Music Streaming Experience</p>
+        </div>
+
+        <!-- About Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span>🎵</span>
+                About Pattupetti
+            </h2>
+            <div class="section-content">
+                <p>
+                    Pattupetti is a modern, feature-rich music streaming application that brings you unlimited access to millions of songs from YouTube. Built with cutting-edge web technologies, it offers a seamless and intuitive music discovery experience across all your devices.
+                </p>
+                <p>
+                    Whether you're looking for the latest hits, timeless classics, or discovering new artists, Pattupetti provides a beautiful, responsive interface that adapts perfectly to smartphones, tablets, laptops, and smart TVs.
+                </p>
+                <p>
+                    Our mission is to make music accessible to everyone while providing the best possible user experience with modern design aesthetics and smooth performance.
+                </p>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span>✨</span>
+                Key Features
+            </h2>
+            <div class="section-content">
+                <ul class="features-list">
+                    <li>
+                        <div class="feature-icon">🔍</div>
+                        <div>
+                            <strong>Smart Search:</strong> Instantly find songs, artists, and albums with our intelligent search system
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">📱</div>
+                        <div>
+                            <strong>Responsive Design:</strong> Optimized for all devices - mobile, tablet, desktop, and TV
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🎛️</div>
+                        <div>
+                            <strong>Compact Player:</strong> Sleek bottom-right player that expands for full controls
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">📋</div>
+                        <div>
+                            <strong>Custom Playlists:</strong> Create and manage your personal music collections
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">❤️</div>
+                        <div>
+                            <strong>Favorites System:</strong> Like and save your favorite tracks for easy access
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🔥</div>
+                        <div>
+                            <strong>Trending Music:</strong> Discover what's hot with our trending music section
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🔀</div>
+                        <div>
+                            <strong>Shuffle & Repeat:</strong> Customize your listening experience with playback modes
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🌙</div>
+                        <div>
+                            <strong>Dark Theme:</strong> Beautiful dark interface that's easy on the eyes
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🐛</div>
+                        <div>
+                            <strong>Bug Reporting:</strong> Easy-to-use bug report system with file upload support
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">⌨️</div>
+                        <div>
+                            <strong>Keyboard Shortcuts:</strong> Control playback with convenient keyboard shortcuts
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- What's New Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span>🆕</span>
+                What's New
+            </h2>
+            <div class="section-content">
+                <div class="changelog-item">
+                    <div class="changelog-version">Version 2.0.0</div>
+                    <div class="changelog-date">December 2024</div>
+                    <ul class="changelog-changes">
+                        <li>Complete redesign of the music player interface</li>
+                        <li>New compact player with smooth expand/collapse animation</li>
+                        <li>Enhanced bug reporting system with file upload</li>
+                        <li>Improved audio playback with better error handling</li>
+                        <li>Added keyboard shortcuts for better accessibility</li>
+                        <li>Performance optimizations and bug fixes</li>
+                        <li>Better mobile responsiveness and touch controls</li>
+                    </ul>
+                </div>
+                
+                <div class="changelog-item">
+                    <div class="changelog-version">Version 1.5.0</div>
+                    <div class="changelog-date">November 2024</div>
+                    <ul class="changelog-changes">
+                        <li>Added playlist management features</li>
+                        <li>Implemented queue system for better track management</li>
+                        <li>Enhanced search functionality with better results</li>
+                        <li>Added offline capability notifications</li>
+                        <li>Improved user interface animations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Creator Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span>👨‍💻</span>
+                About the Creator
+            </h2>
+            <div class="section-content">
+                <div class="creator-info">
+                    <div class="creator-avatar">🎵</div>
+                    <div class="creator-details">
+                        <h3>Passionate Developer & Music Enthusiast</h3>
+                        <p>
+                            Hi! I'm a dedicated developer with a passion for creating exceptional digital experiences. Pattupetti represents my vision of combining beautiful design with powerful functionality to create the ultimate music streaming platform.
+                        </p>
+                        <p>
+                            With years of experience in web development and a deep love for music, I've crafted this application to provide users with an intuitive, fast, and visually stunning way to discover and enjoy their favorite songs.
+                        </p>
+                        <p>
+                            I believe that great software should be both powerful and easy to use, and that's exactly what I've aimed to achieve with Pattupetti. Every feature has been carefully designed and implemented with the user experience in mind.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Social Links -->
+                <div class="social-links">
+                    <a href="https://youtube.com/@yourusername" target="_blank" class="social-link youtube">
+                        <div class="social-icon">📺</div>
+                        <div class="social-info">
+                            <h4>YouTube Channel</h4>
+                            <p>Subscribe for coding tutorials and tech content</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://instagram.com/yourusername" target="_blank" class="social-link instagram">
+                        <div class="social-icon">📸</div>
+                        <div class="social-info">
+                            <h4>Instagram</h4>
+                            <p>Follow for behind-the-scenes and daily updates</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://twitter.com/yourusername" target="_blank" class="social-link twitter">
+                        <div class="social-icon">🐦</div>
+                        <div class="social-info">
+                            <h4>Twitter</h4>
+                            <p>Stay updated with latest development news</p>
+                        </div>
+                    </a>
+                    
+                    <a href="https://github.com/yourusername" target="_blank" class="social-link github">
+                        <div class="social-icon">💻</div>
+                        <div class="social-info">
+                            <h4>GitHub</h4>
+                            <p>Check out my open source projects</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tech Stack Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span>⚡</span>
+                Built With
+            </h2>
+            <div class="section-content">
+                <p>Pattupetti is built using modern web technologies to ensure optimal performance and user experience:</p>
+                <div class="tech-stack">
+                    <div class="tech-item">
+                        <div class="tech-item-icon">🌐</div>
+                        <div class="tech-item-name">HTML5</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-item-icon">🎨</div>
+                        <div class="tech-item-name">CSS3</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-item-icon">⚡</div>
+                        <div class="tech-item-name">JavaScript</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-item-icon">📺</div>
+                        <div class="tech-item-name">YouTube API</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-item-icon">📱</div>
+                        <div class="tech-item-name">Responsive Design</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-item-icon">💾</div>
+                        <div class="tech-item-name">Local Storage</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-item-icon">🎵</div>
+                        <div class="tech-item-name">Web Audio API</div>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-item-icon">🔄</div>
+                        <div class="tech-item-name">PWA Ready</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Keyboard Shortcuts Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span>⌨️</span>
+                Keyboard Shortcuts
+            </h2>
+            <div class="section-content">
+                <ul class="features-list">
+                    <li>
+                        <div class="feature-icon">⏯️</div>
+                        <div>
+                            <strong>Space:</strong> Play/Pause current track
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">⏭️</div>
+                        <div>
+                            <strong>Ctrl + →:</strong> Next track
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">⏮️</div>
+                        <div>
+                            <strong>Ctrl + ←:</strong> Previous track
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🔀</div>
+                        <div>
+                            <strong>Ctrl + S:</strong> Toggle shuffle mode
+                        </div>
+                    </li>
+                    <li>
+                        <div class="feature-icon">🔁</div>
+                        <div>
+                            <strong>Ctrl + R:</strong> Toggle repeat mode
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Support Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span>💝</span>
+                Support This Project
+            </h2>
+            <div class="section-content">
+                <p>
+                    If you enjoy using Pattupetti and would like to support its continued development, here are some ways you can help:
+                </p>
+                <div class="support-actions">
+                    <button class="support-btn primary" onclick="window.open('https://github.com/yourusername/pattupetti', '_blank')">
+                        ⭐ Star on GitHub
+                    </button>
+                    <button class="support-btn secondary" onclick="shareApp()">
+                        📢 Share with Friends
+                    </button>
+                    <button class="support-btn tertiary" onclick="window.open('https://buymeacoffee.com/yourusername', '_blank')">
+                        ☕ Buy Me a Coffee
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <span>📧</span>
+                Get in Touch
+            </h2>
+            <div class="section-content">
+                <p>
+                    Have questions, suggestions, or want to collaborate? I'd love to hear from you!
+                </p>
+                <p>
+                    <strong>Email:</strong> <a href="mailto:your.email@example.com" style="color: #89E7FA;">your.email@example.com</a>
+                </p>
+                <p>
+                    <strong>Website:</strong> <a href="https://yourwebsite.com" target="_blank" style="color: #89E7FA;">yourwebsite.com</a>
+                </p>
+                <p>
+                    <strong>Bug Reports:</strong> Use the built-in bug report feature in the app for technical issues
+                </p>
+            </div>
+        </div>
+
+        <!-- Version Info -->
+        <div class="version-info">
+            <h4>Version 2.0.0</h4>
+            <p>Released December 2024 • Built with ❤️ for music lovers everywhere</p>
+            <p>© 2024 Pattupetti Music Streaming. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        function shareApp() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Pattupetti - Music Streaming',
+                    text: 'Check out this amazing music streaming app!',
+                    url: window.location.origin + '/index.html'
+                }).catch(err => console.log('Error sharing:', err));
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                const url = window.location.origin + '/index.html';
+                navigator.clipboard.writeText(url).then(() => {
+                    alert('App link copied to clipboard!');
+                }).catch(() => {
+                    alert('Unable to share. Please copy the URL manually: ' + url);
+                });
+            }
+        }
+
+        // Add smooth scrolling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Add fade-in animation
+            const sections = document.querySelectorAll('.section');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(section);
+            });
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.feature-icon, .tech-item-icon').forEach(icon => {
+            icon.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(5deg)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            icon.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Add click animation to buttons
+        document.querySelectorAll('.support-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255,255,255,0.5);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                
+                this.style.position = 'relative';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Add ripple animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(2);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

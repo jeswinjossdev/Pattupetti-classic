@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pattupetti Classic - Music Streaming</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">Pattupetti </div>
+        <div class="nav-content">
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search for songs, artists...">
+                <button class="search-btn" id="searchBtn">🔍</button>
+            </div>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="toggleSidebar()">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Your Library</h3>
+                
+                <div class="playlist-item" onclick="showPage('home')">
+                    <div class="playlist-icon">🏠</div>
+                    <span>Home</span>
+                </div>
+
+                <div class="playlist-item" onclick="showPage('trending')">
+                    <div class="playlist-icon">🔥</div>
+                    <span>Trending</span>
+                </div>
+                
+                <div class="playlist-item" onclick="showPage('liked')">
+                    <div class="playlist-icon">❤️</div>
+                    <span>Liked Songs</span>
+                </div>
+                
+                <div class="playlist-item" onclick="showPage('recent')">
+                    <div class="playlist-icon">🕒</div>
+                    <span>Recently Played</span>
+                </div>
+                
+                <div class="playlist-item" onclick="showPage('saved')">
+                    <div class="playlist-icon">💾</div>
+                    <span>Saved</span>
+                </div>
+
+                <div class="playlist-item" onclick="showPage('playlists')">
+                    <div class="playlist-icon">📋</div>
+                    <span>My Playlists</span>
+                </div>
+
+                <div class="playlist-item" onclick="showCreatePlaylist()">
+                    <div class="playlist-icon">➕</div>
+                    <span>Create Playlist</span>
+                </div>
+            </div>
+
+            <!-- User Playlists -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">Your Playlists</h3>
+                <div id="userPlaylistsList">
+                    <!-- User playlists will be populated here -->
+                </div>
+            </div>
+
+            <!-- Support & Help Section -->
+            <div class="sidebar-section support-section">
+                <div class="playlist-item" onclick="showPage('support')">
+                    <div class="playlist-icon">💝</div>
+                    <span>Support Us</span>
+                </div>
+                
+                <div class="playlist-item" onclick="showPage('bug-report')">
+                    <div class="playlist-icon">🐛</div>
+                    <span>Report Bug</span>
+                </div>
+                
+                <div class="playlist-item" onclick="window.open('about.html', '_blank')">
+                    <div class="playlist-icon">ℹ️</div>
+                    <span>About & Updates</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <div class="welcome-section">
+                    <h2 class="section-title">Welcome to Pattupetti</h2>
+                    <p class="section-subtitle">Discover millions of songs from YouTube</p>
+                    <div class="audio-notice">
+                        <span class="notice-icon">🎵</span>
+                        <p>Audio streaming coming soon! Currently in demo mode with full UI features.</p>
+                    </div>
+                </div>
+                
+                <div class="categories-section">
+                    <h3 class="category-title">Popular Categories</h3>
+                    <div class="categories-grid">
+                        <div class="category-card" onclick="searchCategory('latest malayalam songs')">
+                            <div class="category-icon">🎵</div>
+                            <span>Latest Malayalam</span>
+                        </div>
+                        <div class="category-card" onclick="searchCategory('rock music')">
+                            <div class="category-icon">🎸</div>
+                            <span>Rock</span>
+                        </div>
+                        <div class="category-card" onclick="searchCategory('hip hop music')">
+                            <div class="category-icon">🎤</div>
+                            <span>Hip Hop</span>
+                        </div>
+                        <div class="category-card" onclick="searchCategory('electronic music')">
+                            <div class="category-icon">🎧</div>
+                            <span>Electronic</span>
+                        </div>
+                        <div class="category-card" onclick="searchCategory('jazz music')">
+                            <div class="category-icon">🎺</div>
+                            <span>Jazz</span>
+                        </div>
+                        <div class="category-card" onclick="searchCategory('classical music')">
+                            <div class="category-icon">🎻</div>
+                            <span>Classical</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="featured-section">
+                    <h3 class="category-title">Featured Music</h3>
+                    <div class="music-grid compact-grid" id="featuredGrid">
+                        <!-- Featured music will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trending Page -->
+            <div id="trending" class="page">
+                <h2 class="section-title">🔥 Trending Now</h2>
+                <div class="loading" id="trendingLoading">Loading trending music...</div>
+                <div class="music-grid compact-grid" id="trendingGrid">
+                    <!-- Trending songs will be populated here -->
+                </div>
+            </div>
+
+            <!-- Search Results Page -->
+            <div id="search-results" class="page">
+                <h2 class="section-title">Search Results</h2>
+                <div class="loading" id="searchLoading" style="display: none;">Searching...</div>
+                <div class="search-info" id="searchInfo" style="display: none;">
+                    <p>Results for: "<span id="searchQuery"></span>"</p>
+                </div>
+                <div class="music-grid compact-grid" id="searchGrid">
+                    <!-- Search results will be populated here -->
+                </div>
+            </div>
+
+            <!-- Liked Songs Page -->
+            <div id="liked" class="page">
+                <h2 class="section-title">❤️ Liked Songs</h2>
+                <div class="music-grid compact-grid" id="likedGrid">
+                    <!-- Liked songs will be populated here -->
+                </div>
+            </div>
+
+            <!-- Recently Played Page -->
+            <div id="recent" class="page">
+                <h2 class="section-title">🕒 Recently Played</h2>
+                <div class="music-grid compact-grid" id="recentGrid">
+                    <!-- Recently played songs will be populated here -->
+                </div>
+            </div>
+
+            <!-- Saved Page -->
+            <div id="saved" class="page">
+                <h2 class="section-title">💾 Saved Songs</h2>
+                <div class="music-grid compact-grid" id="savedGrid">
+                    <!-- Saved songs will be populated here -->
+                </div>
+            </div>
+
+            <!-- Playlists Page -->
+            <div id="playlists" class="page">
+                <h2 class="section-title">📋 My Playlists</h2>
+                <div class="playlists-grid" id="playlistsGrid">
+                    <!-- User playlists will be populated here -->
+                </div>
+            </div>
+
+            <!-- Individual Playlist Page -->
+            <div id="playlist-view" class="page">
+                <div class="playlist-header">
+                    <button class="back-btn" onclick="showPage('playlists')">← Back</button>
+                    <div class="playlist-info">
+                        <h2 id="playlistTitle">Playlist Name</h2>
+                        <p id="playlistDescription">Playlist description</p>
+                        <span id="playlistCount">0 songs</span>
+                    </div>
+                    <div class="playlist-actions">
+                        <button class="play-all-btn" onclick="playPlaylist()">▶ Play All</button>
+                        <button class="shuffle-play-btn" onclick="shufflePlaylist()">🔀 Shuffle Play</button>
+                    </div>
+                </div>
+                <div class="music-grid compact-grid" id="playlistSongs">
+                    <!-- Playlist songs will be populated here -->
+                </div>
+            </div>
+
+            <!-- Support Page -->
+            <div id="support" class="page">
+                <div class="support-content">
+                    <h2 class="section-title">💝 Support Us</h2>
+                    <div class="support-card">
+                        <div class="creator-info">
+                            <div class="creator-avatar">🎵</div>
+                            <div class="creator-details">
+                                <h3>About the Creator</h3>
+                                <p>Hi! I'm passionate about creating amazing music streaming experiences. This app brings you the best music discovery platform with a beautiful, user-friendly interface.</p>
+                                <p>If you enjoy using Pattupetti, please consider supporting my work and following my content!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <h3>Connect With Me</h3>
+                            <div class="links-grid">
+                                <a href="#" target="_blank" class="social-link youtube">
+                                    <div class="social-icon">📺</div>
+                                    <div class="social-info">
+                                        <h4>YouTube Channel</h4>
+                                        <p>Subscribe for music and tech content</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="#" target="_blank" class="social-link instagram">
+                                    <div class="social-icon">📸</div>
+                                    <div class="social-info">
+                                        <h4>Instagram</h4>
+                                        <p>Follow for daily updates</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="#" target="_blank" class="social-link twitter">
+                                    <div class="social-icon">🐦</div>
+                                    <div class="social-info">
+                                        <h4>Twitter</h4>
+                                        <p>Stay updated with latest news</p>
+                                    </div>
+                                </a>
+                                
+                                <a href="#" target="_blank" class="social-link github">
+                                    <div class="social-icon">💻</div>
+                                    <div class="social-info">
+                                        <h4>GitHub</h4>
+                                        <p>Check out my code projects</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="support-actions">
+                            <h3>Show Your Support</h3>
+                            <div class="action-buttons">
+                                <button class="support-btn primary" onclick="window.open('#', '_blank')">
+                                    ⭐ Rate the App
+                                </button>
+                                <button class="support-btn secondary" onclick="shareApp()">
+                                    📢 Share with Friends
+                                </button>
+                                <button class="support-btn tertiary" onclick="window.open('#', '_blank')">
+                                    ☕ Buy Me a Coffee
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enhanced Bug Report Page -->
+            <div id="bug-report" class="page">
+                <div class="support-content">
+                    <h2 class="section-title">🐛 Report Bug</h2>
+                    <div class="support-card">
+                        <div class="bug-report-intro">
+                            <p>Found a bug or have suggestions for improvement? Help us make Pattupetti better by reporting issues!</p>
+                            <div class="bug-stats">
+                                <div class="stat-item">
+                                    <span class="stat-number" id="bugsFixed">25+</span>
+                                    <span class="stat-label">Bugs Fixed</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number" id="avgResponseTime">24h</span>
+                                    <span class="stat-label">Avg Response</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-number">99%</span>
+                                    <span class="stat-label">Success Rate</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form id="bugReportForm" class="bug-report-form">
+                            <div class="form-group">
+                                <label for="bugTitle">Bug Title *</label>
+                                <input type="text" id="bugTitle" name="bugTitle" class="form-control" required placeholder="Brief description of the issue">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bugType">Bug Type *</label>
+                                <select id="bugType" name="bugType" class="form-control" required>
+                                    <option value="">Select bug type</option>
+                                    <option value="ui">UI/Design Issue</option>
+                                    <option value="audio">Audio Playback Issue</option>
+                                    <option value="search">Search Functionality</option>
+                                    <option value="navigation">Navigation Issue</option>
+                                    <option value="performance">Performance Issue</option>
+                                    <option value="mobile">Mobile Responsiveness</option>
+                                    <option value="api">YouTube API Issue</option>
+                                    <option value="storage">Data Storage Issue</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bugSeverity">Bug Severity</label>
+                                <select id="bugSeverity" name="bugSeverity" class="form-control">
+                                    <option value="low">Low - Minor inconvenience</option>
+                                    <option value="medium" selected>Medium - Affects functionality</option>
+                                    <option value="high">High - Major feature broken</option>
+                                    <option value="critical">Critical - App unusable</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bugDescription">Description *</label>
+                                <textarea id="bugDescription" name="bugDescription" class="form-control" rows="4" required placeholder="Please describe the bug in detail. What happened? What did you expect to happen?"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="stepsToReproduce">Steps to Reproduce *</label>
+                                <textarea id="stepsToReproduce" name="stepsToReproduce" class="form-control" rows="4" required placeholder="1. Go to...
+2. Click on...
+3. See error...
+4. Expected result vs actual result"></textarea>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group half-width">
+                                    <label for="deviceInfo">Device Info</label>
+                                    <input type="text" id="deviceInfo" name="deviceInfo" class="form-control" placeholder="iPhone 15, Samsung Galaxy S24, etc.">
+                                </div>
+                                <div class="form-group half-width">
+                                    <label for="browserInfo">Browser Info</label>
+                                    <input type="text" id="browserInfo" name="browserInfo" class="form-control" placeholder="Chrome 120, Safari 17, etc.">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="bugFile">Attach Screenshot/File (optional)</label>
+                                <input type="file" id="bugFile" name="bugFile" class="form-control file-input" accept="image/*,.pdf,.txt,.doc,.docx" multiple>
+                                <small class="form-help">Supported: Images, PDF, Text, Word documents (Max 5MB each)</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="userEmail">Your Email (optional)</label>
+                                <input type="email" id="userEmail" name="userEmail" class="form-control" placeholder="For follow-up communication">
+                                <small class="form-help">We'll only use this to contact you about your bug report</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="allowFollowup" name="allowFollowup
